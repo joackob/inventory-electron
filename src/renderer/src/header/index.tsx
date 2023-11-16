@@ -1,7 +1,10 @@
-import { AppBar, Box, IconButton, Toolbar, Typography, styled, alpha, InputBase} from '@mui/material'
+import { Badge, AppBar, Box, IconButton, Toolbar, Typography, styled, alpha, InputBase } from '@mui/material'
 import { ReactNode } from 'react'
 import SearchIcon from '@mui/icons-material/Search'
-import MenuIcon from '@mui/icons-material/Menu';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
+
+//import MailIcon from '@mui/icons-material/Mail';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -53,12 +56,14 @@ const Header = (): ReactNode => {
       <AppBar position="static">
         <Toolbar>
           <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-            <MenuIcon />
+
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Ferreteria Tomas 
+            Ferreteria Tomas
           </Typography>
-          <Search>
+          <Search sx={{
+            marginRight:"20px"
+          }}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -67,6 +72,14 @@ const Header = (): ReactNode => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+
+          <Badge badgeContent={4} color="secondary">
+          <ShoppingCartIcon>
+
+          </ShoppingCartIcon>
+
+          </Badge>
+
         </Toolbar>
       </AppBar>
     </Box>

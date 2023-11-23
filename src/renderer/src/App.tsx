@@ -2,12 +2,17 @@ import { ReactNode, useState } from 'react'
 import Header from './header'
 import Inventario from './inventario'
 import { Box, Stack } from '@mui/material'
+import { GridCallbackDetails, GridRowParams, MuiEvent } from '@mui/x-data-grid'
 
 const App = (): ReactNode => {
   const [seleccionados, setSeleccionados] = useState(0);
 
-  const agregarSeleccionados = () => {
+  const cambiarCantDeSeleccionados = (params: GridRowParams, event: MuiEvent, datails: GridCallbackDetails) =>{
     console.log ("agregastwe cosas")
+    console.log(params)
+    console.log(event)
+    console.log(datails)
+
     setSeleccionados(seleccionados + 1);
   }
 
@@ -18,7 +23,7 @@ const App = (): ReactNode => {
         <Header  seleccionados={seleccionados}/>
       </Box>
       <Box component={'main'} flexGrow={1}>
-        <Inventario agregarSeleccionados={agregarSeleccionados} />
+        <Inventario agregarSeleccionados={cambiarCantDeSeleccionados} />
       </Box>
     </Stack>
   )

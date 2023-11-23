@@ -1,5 +1,5 @@
 import { Box, useTheme } from '@mui/material'
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
+import { DataGrid, GridCallbackDetails, GridColDef, GridRowParams, GridValueGetterParams, MuiEvent } from '@mui/x-data-grid'
 import { ReactNode } from 'react'
 //import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
@@ -36,7 +36,7 @@ const rows = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 }
 ]
 
-const Inventario = ({agregarSeleccionados}: {agregarSeleccionados: ()=>void }): ReactNode => {
+const Inventario = ({agregarSeleccionados}: {agregarSeleccionados: (params: GridRowParams, event: MuiEvent, datails: GridCallbackDetails)=>void }): ReactNode => {
   const theme = useTheme()
   return (
     <Box

@@ -36,7 +36,7 @@ const rows = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 }
 ]
 
-const Inventario = (): ReactNode => {
+const Inventario = ({agregarSeleccionados}: {agregarSeleccionados: ()=>void }): ReactNode => {
   const theme = useTheme()
   return (
     <Box
@@ -60,6 +60,8 @@ const Inventario = (): ReactNode => {
           borderRadius: '30px',
           backgroundColor: theme.palette.common.white
         }}
+        onRowClick={agregarSeleccionados}
+        onRowSelectionModelChange={agregarSeleccionados}
       />
     </Box>
   )

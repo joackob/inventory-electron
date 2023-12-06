@@ -13,7 +13,7 @@ const App = (): ReactNode => {
     console.log(event)
     console.log(datails)
 
-    setSeleccionados(seleccionados + 1);
+    setSeleccionados(params.length);
   }
 
 

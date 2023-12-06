@@ -68,7 +68,7 @@ const Header = ({seleccionados}: {seleccionados: number}): ReactNode => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="buscar"
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>

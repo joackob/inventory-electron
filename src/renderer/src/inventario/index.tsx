@@ -1,6 +1,6 @@
 import { Box, useTheme } from '@mui/material'
 import { DataGrid, GridCallbackDetails, GridColDef, GridRowParams, GridValueGetterParams, MuiEvent } from '@mui/x-data-grid'
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 //import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const columns: GridColDef[] = [
@@ -37,6 +37,7 @@ const rows = [
 ]
 
 const Inventario = ({agregarSeleccionados}: {agregarSeleccionados: (params: GridRowParams, event: MuiEvent, datails: GridCallbackDetails)=>void }): ReactNode => {
+  const [encontrados, setEncontrados] = useState(rows);
   const theme = useTheme()
   return (
     <Box
@@ -47,7 +48,7 @@ const Inventario = ({agregarSeleccionados}: {agregarSeleccionados: (params: Grid
       }}
     >
       <DataGrid
-        rows={rows}
+        rows={encontrados}
         columns={columns}
         initialState={{
           pagination: {

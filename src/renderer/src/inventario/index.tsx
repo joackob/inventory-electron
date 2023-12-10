@@ -1,7 +1,6 @@
 import { Box, useTheme } from '@mui/material'
-import { DataGrid, GridCallbackDetails, GridColDef, GridRowParams, GridValueGetterParams, MuiEvent } from '@mui/x-data-grid'
-import { ReactNode, useState } from 'react'
-//import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { DataGrid, GridColDef, GridRowId, GridValueGetterParams } from '@mui/x-data-grid'
+import { ReactNode } from 'react'
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 70 },
@@ -36,8 +35,11 @@ const rows = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 }
 ]
 
-const Inventario = ({agregarSeleccionados}: {agregarSeleccionados: (params: GridRowParams, event: MuiEvent, datails: GridCallbackDetails)=>void }): ReactNode => {
-  const [encontrados, setEncontrados] = useState(rows);
+const Inventario = ({
+  cambiarSeleccionados
+}: {
+  cambiarSeleccionados: (cantidad: number) => void
+}): ReactNode => {
   const theme = useTheme()
   return (
     <Box
@@ -48,7 +50,7 @@ const Inventario = ({agregarSeleccionados}: {agregarSeleccionados: (params: Grid
       }}
     >
       <DataGrid
-        rows={encontrados}
+        rows={rows}
         columns={columns}
         initialState={{
           pagination: {
@@ -61,8 +63,9 @@ const Inventario = ({agregarSeleccionados}: {agregarSeleccionados: (params: Grid
           borderRadius: '30px',
           backgroundColor: theme.palette.common.white
         }}
-        onRowClick={agregarSeleccionados}
-        onRowSelectionModelChange={agregarSeleccionados}
+        onRowSelectionModelChange={(rowsSelected: GridRowId[]) => {
+          cambiarSeleccionados(rowsSelected.length)
+        }}
       />
     </Box>
   )

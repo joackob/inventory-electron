@@ -1,7 +1,9 @@
-import { Badge, AppBar, Box, IconButton, Toolbar, Typography, styled, alpha, InputBase } from '@mui/material'
+import { Badge, AppBar, Box, IconButton, Toolbar, Typography, styled, alpha, InputBase} from '@mui/material'
 import { ReactNode } from 'react'
 import SearchIcon from '@mui/icons-material/Search'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Modal from '@mui/material/Modal';
+import * as React from 'react';
 
 
 //import MailIcon from '@mui/icons-material/Mail';
@@ -50,7 +52,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const Header = ({seleccionados}: {seleccionados: number}): ReactNode => {
+export function BasicModal() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const Header = ({seleccionados}: {seleccionados: number}): ReactNode => {
+ 
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -74,16 +82,38 @@ const Header = ({seleccionados}: {seleccionados: number}): ReactNode => {
           </Search>
 
           <Badge badgeContent={seleccionados} color="secondary">
-          <ShoppingCartIcon>
+         
+
+ 
+          <ShoppingCartIcon onClick={handleOpen}>
 
           </ShoppingCartIcon>
 
           </Badge>
 
+
+          <Modal
+          
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
+
         </Toolbar>
       </AppBar>
     </Box>
   )
+  
 }
-
+}
 export default Header

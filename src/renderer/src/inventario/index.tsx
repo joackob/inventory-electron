@@ -36,9 +36,9 @@ const rows = [
 ]
 
 const Inventario = ({
-  cambiarSeleccionados
+  cambiarSeleccionados, itemsABuscar
 }: {
-  cambiarSeleccionados: (cantidad: number) => void
+  cambiarSeleccionados: (cantidad: number) => void, itemsABuscar: string
 }): ReactNode => {
   const theme = useTheme()
   return (

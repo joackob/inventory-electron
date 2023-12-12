@@ -2,9 +2,11 @@ import { Badge, AppBar, Box, Toolbar, Typography, styled, alpha, InputBase } fro
 import { ReactNode } from 'react'
 import SearchIcon from '@mui/icons-material/Search'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AddIcon from '@mui/icons-material/Add';
 import Modal from '@mui/material/Modal';
 import * as React from 'react';
-import { createSvgIcon } from '@mui/material/utils';
+import IconButton from '@mui/material/IconButton';
+
 
 
 //import MailIcon from '@mui/icons-material/Mail';
@@ -64,9 +66,7 @@ const Header = ({ seleccionados }: { seleccionados: number }): ReactNode => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <PlusIcon size="large" edge="start" color="inherit" sx={{ mr: 2 }}>
-          
-          </PlusIcon>
+
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Ferreteria Tomas
           </Typography>
@@ -81,12 +81,18 @@ const Header = ({ seleccionados }: { seleccionados: number }): ReactNode => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-
+          <IconButton sx={{color:"#fff"}}>
+          <AddIcon >
+          </AddIcon>
+          </IconButton>
+          <IconButton sx={{color:"#fff"}}>
           <Badge badgeContent={seleccionados} color="secondary">
+            
             <ShoppingCartIcon onClick={handleOpen}>
             </ShoppingCartIcon>
+            
           </Badge>
-
+          </IconButton>
 
           <Modal
             open={open}
@@ -95,12 +101,7 @@ const Header = ({ seleccionados }: { seleccionados: number }): ReactNode => {
             aria-describedby="modal-modal-description"
           >
             <Box>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Text in a modal
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-              </Typography>
+              
             </Box>
           </Modal>
 

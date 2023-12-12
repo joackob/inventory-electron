@@ -57,7 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 // export function BasicModal() {
 
-const Header = ({ seleccionados }: { seleccionados: number }): ReactNode => {
+const Header = ({ seleccionados,filtrarPor}: { seleccionados: number, filtrarPor:(string)=>void}): ReactNode => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -66,7 +66,6 @@ const Header = ({ seleccionados }: { seleccionados: number }): ReactNode => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Ferreteria Tomas
           </Typography>

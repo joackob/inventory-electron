@@ -82,7 +82,7 @@ const Header = ({ seleccionados }: { seleccionados: number }): ReactNode => {
             />
           </Search>
           <IconButton sx={{color:"#fff"}}>
-          <AddIcon >
+          <AddIcon>
           </AddIcon>
           </IconButton>
           <IconButton sx={{color:"#fff"}}>

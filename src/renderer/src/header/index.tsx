@@ -57,7 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 // export function BasicModal() {
 
-const Header = ({ seleccionados,filtrarPor}: { seleccionados: number, filtrarPor:(string)=>void}): ReactNode => {
+const Header = ({ seleccionados, filtrarPor }: { seleccionados: number, filtrarPor: (string) => void }): ReactNode => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -69,7 +69,8 @@ const Header = ({ seleccionados,filtrarPor}: { seleccionados: number, filtrarPor
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Ferreteria Tomas
           </Typography>
-          <Search sx={{
+          <Search onChange={(event: React.FormEvent<HTMLDivElement>) => filtrarPor(event.target.value)
+          } sx={{
             marginRight: "20px"
           }}>
             <SearchIconWrapper>
@@ -80,17 +81,17 @@ const Header = ({ seleccionados,filtrarPor}: { seleccionados: number, filtrarPor
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <IconButton sx={{color:"#fff"}}>
-          <AddIcon>
-          </AddIcon>
+          <IconButton sx={{ color: "#fff" }}>
+            <AddIcon>
+            </AddIcon>
           </IconButton>
-          <IconButton sx={{color:"#fff"}}>
-          <Badge badgeContent={seleccionados} color="secondary">
-            
-            <ShoppingCartIcon onClick={handleOpen}>
-            </ShoppingCartIcon>
-            
-          </Badge>
+          <IconButton sx={{ color: "#fff" }}>
+            <Badge badgeContent={seleccionados} color="secondary">
+
+              <ShoppingCartIcon onClick={handleOpen}>
+              </ShoppingCartIcon>
+
+            </Badge>
           </IconButton>
 
           <Modal
@@ -100,7 +101,7 @@ const Header = ({ seleccionados,filtrarPor}: { seleccionados: number, filtrarPor
             aria-describedby="modal-modal-description"
           >
             <Box>
-              
+
             </Box>
           </Modal>
 

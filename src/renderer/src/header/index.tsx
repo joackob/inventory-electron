@@ -70,7 +70,8 @@ const Header = ({ seleccionados, filtrarPor }: { seleccionados: number, filtrarP
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Ferreteria Tomas
           </Typography>
-          <Search sx={{
+          <Search onChange={(event: React.FormEvent<HTMLDivElement>) => filtrarPor(event.target.value)
+          } sx={{
             marginRight: "20px"
           }}>
             <SearchIconWrapper>

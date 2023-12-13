@@ -50,7 +50,7 @@ const Inventario = ({
       }}
     >
       <DataGrid
-        rows={rows}
+        rows={rows.filter((row) => row.lastName.toLocaleLowerCase().includes(itemsABuscar.toLocaleLowerCase() ))}
         columns={columns}
         initialState={{
           pagination: {

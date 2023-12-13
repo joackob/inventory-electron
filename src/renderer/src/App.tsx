@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { useState } from 'react'
 import Header from './header'
 import Inventario from './inventario'
 import { Box, Stack } from '@mui/material'

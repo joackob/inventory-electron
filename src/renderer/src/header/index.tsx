@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Modal from '@mui/material/Modal';
 import * as React from 'react';
 import IconButton from '@mui/material/IconButton';
+import Compra from './compra'
 
 
 
@@ -57,7 +58,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 // export function BasicModal() {
 
-const Header = ({ seleccionados,filtrarPor}: { seleccionados: number, filtrarPor:(string)=>void}): ReactNode => {
+const Header = ({ seleccionados, filtrarPor }: { seleccionados: number, filtrarPor: (string) => void }): ReactNode => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -80,28 +81,26 @@ const Header = ({ seleccionados,filtrarPor}: { seleccionados: number, filtrarPor
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <IconButton sx={{color:"#fff"}}>
-          <AddIcon>
-          </AddIcon>
+          <IconButton sx={{ color: "#fff" }}>
+            <AddIcon>
+            </AddIcon>
           </IconButton>
-          <IconButton sx={{color:"#fff"}}>
-          <Badge badgeContent={seleccionados} color="secondary">
-            
-            <ShoppingCartIcon onClick={handleOpen}>
-            </ShoppingCartIcon>
-            
-          </Badge>
+          <IconButton sx={{ color: "#fff" }}>
+            <Badge badgeContent={seleccionados} color="secondary">
+
+              <ShoppingCartIcon onClick={handleOpen}>
+              </ShoppingCartIcon>
+
+            </Badge>
           </IconButton>
 
           <Modal
             open={open}
             onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
+
           >
-            <Box>
-              
-            </Box>
+            <Compra/>
+
           </Modal>
 
         </Toolbar>

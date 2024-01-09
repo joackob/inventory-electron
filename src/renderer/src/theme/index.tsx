@@ -11,13 +11,16 @@ const themeOptions: ThemeOptions = {
     primary: {
       main: '#1C1C1Cff'
     },
+    secondary: {
+      main: '#FEFEFEff'
+    },
     common: {
       black: '#1C1C1Cff',
       white: '#FEFEFEff'
     },
     text: {
       primary: '#1C1C1Cff',
-      secondary: '#D6EDD9ff'
+      secondary: '#FEFEFEff'
     },
     background: {
       default: '#FEFEFEff'

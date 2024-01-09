@@ -1,27 +1,27 @@
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 import Header from './header'
-import Inventario from './inventario'
-import { Box, Stack } from '@mui/material'
+import Inventory from './inventario'
+import { Box } from '@mui/material'
 
-const App = () => {
+const App = (): ReactNode => {
   const [seleccionados, setSeleccionados] = useState(0)
-  const [palabras, setPalabras] = useState("")
-  const cambiarCantDeSeleccionados = (cantidad: number) => {
+  const [palabras, setPalabras] = useState('')
+  const cambiarCantDeSeleccionados = (cantidad: number): void => {
     setSeleccionados(cantidad)
   }
-  const buscar = (palabra: string) => {
+  const buscar = (palabra: string): void => {
     setPalabras(palabra)
   }
 
   return (
-    <Stack height={'96vh'}>
+    <Box height={'96vh'} marginX={'auto'}>
       <Box component={'header'}>
-        <Header seleccionados={seleccionados} filtrarPor={buscar}/>
+        <Header seleccionados={seleccionados} filtrarPor={buscar} />
       </Box>
       <Box component={'main'} flexGrow={1}>
-        <Inventario cambiarSeleccionados={cambiarCantDeSeleccionados} itemsABuscar={palabras} />
+        <Inventory cambiarSeleccionados={cambiarCantDeSeleccionados} itemsABuscar={palabras} />
       </Box>
-    </Stack>
+    </Box>
   )
 }
 

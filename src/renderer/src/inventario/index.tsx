@@ -36,21 +36,25 @@ const rows = [
 ]
 
 const Inventario = ({
-  cambiarSeleccionados, itemsABuscar
+  cambiarSeleccionados,
+  itemsABuscar
 }: {
-  cambiarSeleccionados: (cantidad: number) => void, itemsABuscar: string
+  cambiarSeleccionados: (cantidad: number) => void
+  itemsABuscar: string
 }): ReactNode => {
   const theme = useTheme()
   return (
     <Box
       sx={{
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: theme.palette.common.white,
         padding: '20px',
         height: '100%'
       }}
     >
       <DataGrid
-        rows={rows.filter((row) => row.lastName.toLocaleLowerCase().includes(itemsABuscar.toLocaleLowerCase() ))}
+        rows={rows.filter((row) =>
+          row.lastName.toLocaleLowerCase().includes(itemsABuscar.toLocaleLowerCase())
+        )}
         columns={columns}
         initialState={{
           pagination: {
@@ -63,7 +67,7 @@ const Inventario = ({
           borderRadius: '30px',
           backgroundColor: theme.palette.common.white
         }}
-        onRowSelectionModelChange={(rowsSelected: GridRowId[]) => {
+        onRowSelectionModelChange={(rowsSelected: GridRowId[]): void => {
           cambiarSeleccionados(rowsSelected.length)
         }}
       />

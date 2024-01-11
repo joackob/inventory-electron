@@ -1,9 +1,9 @@
 import { Box } from '@mui/material'
-import { ReactNode } from 'react'
 import { useAtom } from 'jotai'
 import { useTheme } from '@mui/material/styles'
 import { productosSeleccionados } from '../state/productos-seleccionados'
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
+import { forwardRef } from 'react'
 
 const columns: GridColDef[] = [
   { field: 'categoria', headerName: 'Categoría' },
@@ -13,7 +13,7 @@ const columns: GridColDef[] = [
   { field: 'cantidadAAdquirir', headerName: 'Cantidad a adquirir' }
 ]
 
-const ResumenCompra = (): ReactNode => {
+const ResumenCompra = forwardRef((props, ref) => {
   const [seleccionados] = useAtom(productosSeleccionados)
   const theme = useTheme()
 
@@ -25,6 +25,9 @@ const ResumenCompra = (): ReactNode => {
       top={'50%'}
       left={'50%'}
       sx={{ backgroundColor: theme.palette.common.white, transform: 'translate(-50%, -50%)' }}
+      width={'70vw'}
+      ref={ref}
+      {...props}
     >
       <DataGrid
         columns={columns}
@@ -38,6 +41,8 @@ const ResumenCompra = (): ReactNode => {
       />
     </Box>
   )
-}
+})
+
+ResumenCompra.displayName = 'ResumenCompra'
 
 export default ResumenCompra

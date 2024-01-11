@@ -5,7 +5,7 @@ import { ReactNode, useState } from 'react'
 import { useAtom } from 'jotai'
 import { productosSeleccionados } from '../state/productos-seleccionados'
 
-const ShoppingCart = (): ReactNode => {
+const CarritoDeCompras = (): ReactNode => {
   const [open, setOpen] = useState(false)
   const handleOpen = (): void => setOpen(true)
   const handleClose = (): void => setOpen(false)
@@ -26,4 +26,4 @@ const ShoppingCart = (): ReactNode => {
   )
 }
 
-export default ShoppingCart
+export default CarritoDeCompras

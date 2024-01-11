@@ -52,7 +52,7 @@ const TablaInventario = (): ReactNode => {
           backgroundColor: theme.palette.common.white
         }}
         onRowSelectionModelChange={(idsSeleccionados: GridRowId[]): void => {
-          seleccionar(idsSeleccionados.map((id) => mapProductos[id]))
+          seleccionar(idsSeleccionados.map((id) => mapProductos.get(id as string)!))
         }}
       />
     </Box>

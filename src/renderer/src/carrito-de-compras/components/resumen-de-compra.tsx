@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { useAtom } from 'jotai'
 import { useTheme } from '@mui/material/styles'
 import { productosSeleccionados } from '../state/productos-seleccionados'
@@ -6,11 +6,10 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import { forwardRef } from 'react'
 
 const columns: GridColDef[] = [
-  { field: 'categoria', headerName: 'Categoría' },
-  { field: 'descripcion', headerName: 'Descripción' },
+  { field: 'descripcion', headerName: 'Descripción', width: 300 },
   { field: 'precio', headerName: 'Precio', type: 'number' },
-  { field: 'unidadDeMedida', headerName: 'Unidad de medida' },
-  { field: 'cantidadAAdquirir', headerName: 'Cantidad a adquirir' }
+  { field: 'unidadDeMedida', headerName: 'Unidad' },
+  { field: 'cantidadAAdquirir', headerName: 'Cantidad ', type: 'number', editable: true }
 ]
 
 const ResumenCompra = forwardRef((props, ref) => {
@@ -29,14 +28,17 @@ const ResumenCompra = forwardRef((props, ref) => {
       ref={ref}
       {...props}
     >
+      <Typography fontWeight={'bold'} marginBottom={'8px'}>
+        Resumen de compra
+      </Typography>
       <DataGrid
         columns={columns}
-        rows={seleccionados.map((producto) => ({ ...producto, cantidadAAdquirir: 0 }))}
+        rows={seleccionados.map((producto) => ({ ...producto, cantidadAAdquirir: 1 }))}
         sx={{ backgroundColor: theme.palette.common.white }}
+        density={'compact'}
         disableColumnMenu
         disableColumnFilter
         disableColumnSelector
-        disableDensitySelector
         hideFooter
       />
     </Box>

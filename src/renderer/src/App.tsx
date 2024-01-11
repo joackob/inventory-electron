@@ -5,7 +5,7 @@ import { Box } from '@mui/material'
 
 const App = (): ReactNode => {
   return (
-    <Box height={'96vh'} marginX={'auto'}>
+    <Box height={'96vh'} marginX={'auto'} width={'96vw'}>
       <Box component={'header'}>
         <Encabezado />
       </Box>

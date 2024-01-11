@@ -9,10 +9,10 @@ import { Producto } from '../models/producto'
 import { mappingProductos } from '../utils/mapping-productos'
 
 const columns: GridColDef[] = [
-  { field: 'categoria', headerName: 'Categoría' },
-  { field: 'descripcion', headerName: 'Descripción' },
-  { field: 'precio', headerName: 'Precio', type: 'number' },
-  { field: 'unidadDeMedida', headerName: 'Unidad de medida' }
+  { field: 'categoria', headerName: 'Categoría', width: 150 },
+  { field: 'descripcion', headerName: 'Descripción', width: 200 },
+  { field: 'precio', headerName: 'Precio', type: 'number', width: 150 },
+  { field: 'unidadDeMedida', headerName: 'Unidad de medida', width: 150 }
 ]
 
 const productos: Producto[] = [
@@ -39,7 +39,6 @@ const TablaInventario = (): ReactNode => {
     <Box
       sx={{
         backgroundColor: theme.palette.common.white,
-        padding: '20px',
         height: '100%'
       }}
     >
@@ -47,8 +46,9 @@ const TablaInventario = (): ReactNode => {
         rows={productos.filter((row) => row.descripcion.toLowerCase().includes(consulta))}
         columns={columns}
         checkboxSelection
+        hideFooterSelectedRowCount
         sx={{
-          borderRadius: '30px',
+          borderRadius: '32px',
           backgroundColor: theme.palette.common.white
         }}
         onRowSelectionModelChange={(idsSeleccionados: GridRowId[]): void => {

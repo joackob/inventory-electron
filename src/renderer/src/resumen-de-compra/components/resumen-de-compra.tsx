@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles'
 import idsDeProductosSeleccionados from '@renderer/carrito-de-compras/state/productos-seleccionados'
 import { productosPorID } from '@renderer/inventario/state/productos'
 import { DataGrid, GridColDef, GridEditCellProps, GridEditInputCell } from '@mui/x-data-grid'
-import { ReactNode, forwardRef, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import { ProductoAAdquirir } from '../models/producto-a-adquirir'
 
 const columns: GridColDef[] = [
@@ -34,7 +34,7 @@ const columns: GridColDef[] = [
   }
 ]
 
-const ResumenCompra = forwardRef((props, ref) => {
+const ResumenCompra = (): ReactNode => {
   const theme = useTheme()
   const [ids] = useAtom(idsDeProductosSeleccionados)
   const [productos] = useAtom(productosPorID)
@@ -48,20 +48,7 @@ const ResumenCompra = forwardRef((props, ref) => {
   }, 0)
 
   return (
-    <Box
-      sx={{
-        backgroundColor: theme.palette.common.white,
-        position: 'absolute',
-        transform: 'translate(-50%, -50%)',
-        borderRadius: '16px',
-        padding: '16px',
-        top: '50%',
-        left: '50%',
-        width: '70vw'
-      }}
-      ref={ref}
-      {...props}
-    >
+    <>
       <Toolbar>
         <Typography fontWeight={'bold'} marginBottom={'8px'}>
           Resumen de compra
@@ -92,10 +79,8 @@ const ResumenCompra = forwardRef((props, ref) => {
           return actualizacion
         }}
       />
-    </Box>
+    </>
   )
-})
-
-ResumenCompra.displayName = 'ResumenCompra'
+}
 
 export default ResumenCompra

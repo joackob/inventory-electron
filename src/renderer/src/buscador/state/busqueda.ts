@@ -1,3 +1,4 @@
 import { atom } from 'jotai'
 
-export const busqueda = atom<string>('')
+const busqueda = atom<string>('')
+export default busqueda

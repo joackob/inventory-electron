@@ -2,11 +2,11 @@ import { Box } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { DataGrid, GridColDef, GridRowId } from '@mui/x-data-grid'
 import { ReactNode } from 'react'
-import { busqueda } from '@renderer/buscador/state/busqueda'
-import { productosSeleccionados } from '@renderer/carrito-de-compras/state/productos-seleccionados'
 import { useAtom } from 'jotai'
 import { Producto } from '../models/producto'
-import { mappingProductos } from '../utils/mapping-productos'
+import consultaRealizada from '@renderer/buscador/state/busqueda'
+import productosVisibles from '../state/productos'
+import idsSeleccionados from '@renderer/carrito-de-compras/state/productos-seleccionados'
 
 const columns: GridColDef[] = [
   { field: 'categoria', headerName: 'Categoría', width: 150 },
@@ -15,25 +15,25 @@ const columns: GridColDef[] = [
   { field: 'unidadDeMedida', headerName: 'Unidad de medida', width: 150 }
 ]
 
-const productos: Producto[] = [
-  { id: '1', categoria: 'Lácteos', descripcion: 'Leche', precio: 20, unidadDeMedida: 'Litros' },
-  { id: '2', categoria: 'Lácteos', descripcion: 'Queso', precio: 30, unidadDeMedida: 'Gramos' },
-  { id: '3', categoria: 'Lácteos', descripcion: 'Yogurt', precio: 40, unidadDeMedida: 'Gramos' },
-  {
-    id: '4',
-    categoria: 'Lácteos',
-    descripcion: 'Mantequilla',
-    precio: 50,
-    unidadDeMedida: 'Gramos'
-  }
-]
-
-const mapProductos = mappingProductos(productos)
+const filtrarProductos = ({
+  productos,
+  consulta
+}: {
+  productos: Producto[]
+  consulta: string
+}): Producto[] => {
+  return productos.filter(({ categoria, descripcion }) => {
+    let encontrado = categoria.toLowerCase().includes(consulta)
+    encontrado ||= descripcion.toLowerCase().includes(consulta)
+    return encontrado
+  })
+}
 
 const TablaInventario = (): ReactNode => {
   const theme = useTheme()
-  const [consulta] = useAtom(busqueda)
-  const [, seleccionar] = useAtom(productosSeleccionados)
+  const [consulta] = useAtom(consultaRealizada)
+  const [productos] = useAtom(productosVisibles)
+  const [, seleccionar] = useAtom(idsSeleccionados)
 
   return (
     <Box
@@ -43,7 +43,7 @@ const TablaInventario = (): ReactNode => {
       }}
     >
       <DataGrid
-        rows={productos.filter((row) => row.descripcion.toLowerCase().includes(consulta))}
+        rows={filtrarProductos({ productos, consulta })}
         columns={columns}
         checkboxSelection
         hideFooterSelectedRowCount
@@ -51,8 +51,8 @@ const TablaInventario = (): ReactNode => {
           borderRadius: '32px',
           backgroundColor: theme.palette.common.white
         }}
-        onRowSelectionModelChange={(idsSeleccionados: GridRowId[]): void => {
-          seleccionar(idsSeleccionados.map((id) => mapProductos.get(id as string)!))
+        onRowSelectionModelChange={(ids: GridRowId[]): void => {
+          seleccionar(ids as string[])
         }}
       />
     </Box>

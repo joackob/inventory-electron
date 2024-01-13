@@ -1,11 +1,11 @@
-import { Box, Toolbar, Typography } from '@mui/material'
+import { Box, Toolbar, Tooltip, Typography } from '@mui/material'
 import { useAtom } from 'jotai'
 import { useTheme } from '@mui/material/styles'
 import { productosSeleccionados } from '../state/productos-seleccionados'
-import { DataGrid, GridColDef } from '@mui/x-data-grid'
-import { forwardRef, useState } from 'react'
+import { DataGrid, GridColDef, GridEditCellProps, GridEditInputCell } from '@mui/x-data-grid'
+import { ReactNode, forwardRef, useState } from 'react'
+import { ProductoAAdquirir } from '../models/producto-a-adquirir'
 
-// Es necesario revisar el caso en que la cantidad a adquirir es negativa
 // Es necesario revisar cuando se pide más de lo que existe
 
 const columns: GridColDef[] = [
@@ -16,7 +16,19 @@ const columns: GridColDef[] = [
     field: 'cantidadAAdquirir',
     headerName: 'Cantidad ',
     type: 'number',
-    editable: true
+    editable: true,
+    preProcessEditCellProps: (params): GridEditCellProps => {
+      const hasError = params.props.value < 0
+      return { ...params.props, error: hasError }
+    },
+    renderEditCell: (props): ReactNode => {
+      const { error } = props
+      return (
+        <Tooltip open={error} title={'No puede ser menor a 0'}>
+          <GridEditInputCell {...props} />
+        </Tooltip>
+      )
+    }
   }
 ]
 
@@ -65,14 +77,14 @@ const ResumenCompra = forwardRef((props, ref) => {
         disableColumnSelector
         hideFooter
         editMode={'row'}
-        processRowUpdate={(row): void => {
-          setResumen(
-            resumen.map((item) =>
-              item.id === row.id ? row : { ...item, cantidadAAdquirir: row.cantidadAAdquirir }
-            )
-          )
+        processRowUpdate={(
+          newRow: ProductoAAdquirir,
+          oldRow: ProductoAAdquirir
+        ): ProductoAAdquirir => {
+          const rowUpdated = newRow.cantidadAAdquirir > 0 ? newRow : oldRow
+          setResumen(resumen.map((item) => (item.id === rowUpdated.id ? rowUpdated : item)))
+          return rowUpdated
         }}
-        onProcessRowUpdateError={(): void => {}}
       />
     </Box>
   )

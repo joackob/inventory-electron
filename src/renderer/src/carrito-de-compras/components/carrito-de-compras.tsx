@@ -3,14 +3,14 @@ import { useTheme } from '@mui/material/styles'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import ResumenDeCompra from '@renderer/resumen-de-compra/components/resumen-de-compra'
 import { ReactNode, useState } from 'react'
-import { useAtom } from 'jotai'
+import { useAtomValue } from 'jotai'
 import productosSeleccionados from '../state/productos-seleccionados'
 
 const CarritoDeCompras = (): ReactNode => {
   const [abierto, setAbierto] = useState(false)
   const abrir = (): void => setAbierto(true)
   const cerrar = (): void => setAbierto(false)
-  const [{ length: cantidad }] = useAtom(productosSeleccionados)
+  const { length: cantidad } = useAtomValue(productosSeleccionados)
   const theme = useTheme()
 
   return (

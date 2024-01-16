@@ -1,11 +1,11 @@
 import { Box, Toolbar, Tooltip, Typography } from '@mui/material'
-import { useAtom } from 'jotai'
+import { useAtomValue } from 'jotai'
 import { useTheme } from '@mui/material/styles'
 import idsDeProductosSeleccionados from '@renderer/carrito-de-compras/state/productos-seleccionados'
-import { productosPorID } from '@renderer/inventario/state/productos'
 import { DataGrid, GridColDef, GridEditCellProps, GridEditInputCell } from '@mui/x-data-grid'
 import { ReactNode, useState } from 'react'
 import { ProductoAAdquirir } from '../models/producto-a-adquirir'
+import { obtenerProductoPorID } from '@renderer/inventario/services'
 
 const columns: GridColDef[] = [
   { field: 'descripcion', headerName: 'Descripción', width: 300 },
@@ -36,10 +36,9 @@ const columns: GridColDef[] = [
 
 const ResumenCompra = (): ReactNode => {
   const theme = useTheme()
-  const [ids] = useAtom(idsDeProductosSeleccionados)
-  const [productos] = useAtom(productosPorID)
-  const productosAAdquirir = ids.map((id) => {
-    const producto = productos.get(id)!
+  const ids = useAtomValue(idsDeProductosSeleccionados)
+  const productos = obtenerProductoPorID(ids)
+  const productosAAdquirir = productos.map((producto) => {
     return { ...producto, cantidadAAdquirir: 1 }
   })
   const [resumen, setResumen] = useState(productosAAdquirir)

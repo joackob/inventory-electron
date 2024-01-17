@@ -15,7 +15,7 @@ const CarritoDeCompras = (): ReactNode => {
 
   return (
     <>
-      <IconButton sx={{ color: '#fff' }} onClick={abrir}>
+      <IconButton sx={{ color: theme.palette.secondary.main }} onClick={abrir}>
         <Badge badgeContent={cantidad} color="secondary">
           <ShoppingCartIcon />
         </Badge>

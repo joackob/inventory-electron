@@ -28,7 +28,8 @@
     "@mui/material": "^5.14.18",
     "@mui/x-data-grid": "^6.18.1",
     "electron-updater": "^6.1.1",
-    "jotai": "^2.6.1"
+    "jotai": "^2.6.1",
+    "pocketbase": "^0.20.3"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config-prettier": "^1.0.1",

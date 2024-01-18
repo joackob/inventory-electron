@@ -32,11 +32,15 @@ const TablaInventario = (): ReactNode => {
       <DataGrid
         rows={productos}
         columns={columns}
-        hideFooterSelectedRowCount
         checkboxSelection
+        disableColumnFilter
+        disableColumnMenu
+        disableColumnSelector
+        disableDensitySelector
         sx={{
-          borderRadius: '32px',
-          backgroundColor: theme.palette.common.white
+          borderRadius: '16px',
+          backgroundColor: theme.palette.common.white,
+          minHeight: '256px'
         }}
         rowSelectionModel={seleccionados as GridRowSelectionModel}
         onRowClick={(params): void => {

@@ -1,29 +1,36 @@
 import { Producto } from '../models/producto'
+import PocketBase from 'pocketbase'
 
-const repoInventario: Producto[] = [
-  { id: '1', categoria: 'Lácteos', descripcion: 'Leche', precio: 20, unidadDeMedida: 'Litros' },
-  { id: '2', categoria: 'Lácteos', descripcion: 'Queso', precio: 30, unidadDeMedida: 'Gramos' },
-  { id: '3', categoria: 'Lácteos', descripcion: 'Yogurt', precio: 40, unidadDeMedida: 'Gramos' },
-  {
-    id: '4',
-    categoria: 'Lácteos',
-    descripcion: 'Mantequilla',
-    precio: 50,
-    unidadDeMedida: 'Gramos'
-  }
-]
+// @ts-ignore //api defined in preload
+const pb = new PocketBase(api.uri_api)
 
-export const buscarProductos = (palabrasClave: string): Producto[] => {
-  const productosEncontrados = repoInventario.filter(({ categoria, descripcion }) => {
-    const encontrado =
-      categoria.toLowerCase().includes(palabrasClave.toLowerCase()) ||
-      descripcion.toLowerCase().includes(palabrasClave.toLowerCase())
-    return encontrado
+export const buscarProductos = async (palabrasClave: string): Promise<Producto[]> => {
+  const respuesta = await pb
+    .collection('productos')
+    .getFullList({ filter: `descripcion ~ '${palabrasClave}'` })
+  const productosEncontrados = respuesta.map((item) => {
+    return {
+      id: item.id,
+      categoria: item.categoria,
+      descripcion: item.descripcion,
+      precio: item.precio,
+      unidadDeMedida: item.medida
+    }
   })
   return productosEncontrados
 }
 
-export const obtenerProductoPorID = (ids: string[]): Producto[] => {
-  const productosEncontrados = repoInventario.filter(({ id }) => ids.includes(id))
+export const obtenerProductosPorID = async (ids: string[]): Promise<Producto[]> => {
+  const respuesta = await pb.collection('productos').getFullList({ filter: `id ?~ '${ids}'` })
+  const productosEncontrados = respuesta.map((item) => {
+    return {
+      id: item.id,
+      categoria: item.categoria,
+      descripcion: item.descripcion,
+      precio: item.precio,
+      unidadDeMedida: item.medida
+    }
+  })
+
   return productosEncontrados
 }

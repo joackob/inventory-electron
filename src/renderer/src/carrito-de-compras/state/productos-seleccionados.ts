@@ -1,4 +1,6 @@
 import { atom } from 'jotai'
+import { loadable } from 'jotai/utils'
+import { obtenerProductosPorID } from '@renderer/inventario/services'
 
 export const idsSeleccionados = atom<string[]>([])
 
@@ -12,5 +14,13 @@ export const seleccionarID = atom(null, (get, set, idPorAgregar: string) => {
   }
   set(idsSeleccionados, Array.from(seleccionados))
 })
+
+export const obtenerProductosSeleccionados = loadable(
+  atom(async (get) => {
+    const ids = get(idsSeleccionados)
+    const productos = await obtenerProductosPorID(ids)
+    return productos
+  })
+)
 
 export default idsSeleccionados

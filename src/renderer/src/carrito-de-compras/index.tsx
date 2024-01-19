@@ -1,22 +1,21 @@
 import { Badge, Box, IconButton, Modal } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import ResumenDeCompra from '@renderer/resumen-de-compra/components/resumen-de-compra'
+import ResumenDeCompra from '@renderer/resumen-de-compra'
 import { ReactNode, useState } from 'react'
 import { useAtomValue } from 'jotai'
-import productosSeleccionados from '../state/productos-seleccionados'
+import { cantidadDeProductosSeleccionados } from './state'
 
 const CarritoDeCompras = (): ReactNode => {
   const [abierto, setAbierto] = useState(false)
   const abrir = (): void => setAbierto(true)
   const cerrar = (): void => setAbierto(false)
-  const { length: cantidad } = useAtomValue(productosSeleccionados)
   const theme = useTheme()
 
   return (
     <>
       <IconButton sx={{ color: theme.palette.secondary.main }} onClick={abrir}>
-        <Badge badgeContent={cantidad} color="secondary">
+        <Badge badgeContent={useAtomValue(cantidadDeProductosSeleccionados)} color="secondary">
           <ShoppingCartIcon />
         </Badge>
       </IconButton>

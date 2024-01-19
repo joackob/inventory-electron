@@ -3,5 +3,5 @@ export interface Producto {
   categoria: string
   descripcion: string
   precio: number
-  unidadDeMedida: string
+  unidad: string
 }

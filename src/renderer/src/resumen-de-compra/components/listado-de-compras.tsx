@@ -1,5 +1,5 @@
 import { useState, ReactNode } from 'react'
-import { ProductoAAdquirir } from '../models/producto-a-adquirir'
+import { ProductoAComprar } from '../models/producto-a-comprar'
 import { Box, Toolbar, Tooltip, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { DataGrid, GridColDef, GridEditCellProps, GridEditInputCell } from '@mui/x-data-grid'
@@ -7,9 +7,9 @@ import { DataGrid, GridColDef, GridEditCellProps, GridEditInputCell } from '@mui
 const columns: GridColDef[] = [
   { field: 'descripcion', headerName: 'Descripción', width: 300 },
   { field: 'precio', headerName: 'Precio', type: 'number' },
-  { field: 'unidadDeMedida', headerName: 'Unidad' },
+  { field: 'unidad', headerName: 'Unidad de medida' },
   {
-    field: 'cantidadAAdquirir',
+    field: 'cantidad',
     headerName: 'Cantidad ',
     type: 'number',
     editable: true,
@@ -31,13 +31,10 @@ const columns: GridColDef[] = [
   }
 ]
 
-const TablaProductos = ({ productos }: { productos: ProductoAAdquirir[] }): ReactNode => {
+const ListadoDeCompras = ({ productos }: { productos: ProductoAComprar[] }): ReactNode => {
   const [resumen, setResumen] = useState(productos)
   const theme = useTheme()
-  const precioFinal = resumen.reduce(
-    (total, item) => total + item.precio * item.cantidadAAdquirir,
-    0
-  )
+  const precioFinal = resumen.reduce((total, item) => total + item.precio * item.cantidad, 0)
   return (
     <>
       <Toolbar>
@@ -60,10 +57,10 @@ const TablaProductos = ({ productos }: { productos: ProductoAAdquirir[] }): Reac
         hideFooter
         editMode={'row'}
         processRowUpdate={(
-          nuevosCambios: ProductoAAdquirir,
-          estadoPrevio: ProductoAAdquirir
-        ): ProductoAAdquirir => {
-          const { cantidadAAdquirir } = nuevosCambios
+          nuevosCambios: ProductoAComprar,
+          estadoPrevio: ProductoAComprar
+        ): ProductoAComprar => {
+          const { cantidad: cantidadAAdquirir } = nuevosCambios
           const actualizacion = cantidadAAdquirir > 0 ? nuevosCambios : estadoPrevio
           setResumen(resumen.map((item) => (item.id === actualizacion.id ? actualizacion : item)))
           return actualizacion
@@ -73,4 +70,4 @@ const TablaProductos = ({ productos }: { productos: ProductoAAdquirir[] }): Reac
   )
 }
 
-export default TablaProductos
+export default ListadoDeCompras

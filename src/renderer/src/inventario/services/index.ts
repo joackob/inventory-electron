@@ -14,7 +14,7 @@ export const buscarProductos = async (palabrasClave: string): Promise<Producto[]
       categoria: item.categoria,
       descripcion: item.descripcion,
       precio: item.precio,
-      unidadDeMedida: item.medida
+      unidad: item.medida
     }
   })
   return productosEncontrados
@@ -28,7 +28,7 @@ export const obtenerProductosPorID = async (ids: string[]): Promise<Producto[]> 
       categoria: item.categoria,
       descripcion: item.descripcion,
       precio: item.precio,
-      unidadDeMedida: item.medida
+      unidad: item.medida
     }
   })
 

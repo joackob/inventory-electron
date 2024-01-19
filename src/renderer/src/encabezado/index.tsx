@@ -1,9 +1,9 @@
 import { AppBar, Box, Toolbar } from '@mui/material'
 import { ReactNode } from 'react'
-import Logo from './logo'
-import Buscador from '@renderer/buscador/components/buscador'
-import CarritoDeCompras from '@renderer/carrito-de-compras/components/carrito-de-compras'
-import Storage from '@renderer/storage/components/storage'
+import Logo from './components/logo'
+import Buscador from '@renderer/buscador'
+import CarritoDeCompras from '@renderer/carrito-de-compras'
+import Storage from '@renderer/storage'
 
 const Header = (): ReactNode => {
   return (

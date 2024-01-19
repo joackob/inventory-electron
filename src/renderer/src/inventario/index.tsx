@@ -3,17 +3,14 @@ import { useTheme } from '@mui/material/styles'
 import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid'
 import { ReactNode } from 'react'
 import { useAtomValue, useSetAtom } from 'jotai'
-import productosEncontrados from '../state/productos'
-import {
-  idsSeleccionados,
-  seleccionarID
-} from '@renderer/carrito-de-compras/state/productos-seleccionados'
+import productosEncontrados from './state'
+import { idsSeleccionados, seleccionarID } from '@renderer/carrito-de-compras/state'
 
 const columns: GridColDef[] = [
   { field: 'categoria', headerName: 'Categoría', width: 150 },
   { field: 'descripcion', headerName: 'Descripción', width: 200 },
   { field: 'precio', headerName: 'Precio', type: 'number', width: 150 },
-  { field: 'unidadDeMedida', headerName: 'Unidad de medida', width: 150 }
+  { field: 'unidad', headerName: 'Unidad de medida', width: 150 }
 ]
 
 const TablaInventario = (): ReactNode => {

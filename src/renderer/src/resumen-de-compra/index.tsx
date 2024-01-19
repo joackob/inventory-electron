@@ -1,7 +1,7 @@
-import { obtenerProductosSeleccionados } from '@renderer/carrito-de-compras/state/productos-seleccionados'
+import { obtenerProductosSeleccionados } from '@renderer/carrito-de-compras/state'
 import { useAtomValue } from 'jotai'
 import { ReactNode } from 'react'
-import TablaProductos from './tabla-de-productos-adquiridos'
+import ListadoDeCompras from './components/listado-de-compras'
 import { Producto } from '@renderer/inventario/models/producto'
 import { Alert, CircularProgress } from '@mui/material'
 
@@ -12,10 +12,10 @@ const ResumenCompra = (): ReactNode => {
   return (
     <>
       {state === 'hasData' && (
-        <TablaProductos
+        <ListadoDeCompras
           productos={productosSeleccionados.data.map((item: Producto) => ({
             ...item,
-            cantidadAAdquirir: 1
+            cantidad: 1
           }))}
         />
       )}

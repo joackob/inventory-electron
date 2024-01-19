@@ -5,14 +5,16 @@ import { obtenerProductosPorID } from '@renderer/inventario/services'
 export const idsSeleccionados = atom<string[]>([])
 
 export const seleccionarID = atom(null, (get, set, idPorAgregar: string) => {
-  const seleccionados = new Set(get(idsSeleccionados))
-  const esNuevo = !seleccionados.has(idPorAgregar)
-  if (esNuevo) {
-    seleccionados.add(idPorAgregar)
-  } else {
-    seleccionados.delete(idPorAgregar)
-  }
-  set(idsSeleccionados, Array.from(seleccionados))
+  const seleccionados = get(idsSeleccionados)
+  const seleccionActualizada = seleccionados.includes(idPorAgregar)
+    ? seleccionados.filter((id) => id !== idPorAgregar)
+    : [...seleccionados, idPorAgregar]
+  set(idsSeleccionados, seleccionActualizada)
+})
+
+export const cantidadDeProductosSeleccionados = atom((get) => {
+  const { length } = get(idsSeleccionados)
+  return length
 })
 
 export const obtenerProductosSeleccionados = loadable(

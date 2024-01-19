@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
-import Encabezado from '@renderer/encabezado/components/encabezado'
-import TablaDeInventario from '@renderer/inventario/components/tabla-de-inventario'
+import Encabezado from '@renderer/encabezado'
+import TablaDeInventario from '@renderer/inventario'
 import { Box } from '@mui/material'
 
 const App = (): ReactNode => {

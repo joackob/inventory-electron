@@ -7,11 +7,10 @@ import { Alert, CircularProgress } from '@mui/material'
 
 const ResumenCompra = (): ReactNode => {
   const productosSeleccionados = useAtomValue(obtenerProductosSeleccionados)
-  const { state } = productosSeleccionados
 
   return (
     <>
-      {state === 'hasData' && (
+      {productosSeleccionados.state === 'hasData' && (
         <ListadoDeCompras
           productos={productosSeleccionados.data.map((item: Producto) => ({
             ...item,
@@ -19,8 +18,10 @@ const ResumenCompra = (): ReactNode => {
           }))}
         />
       )}
-      {state === 'hasError' && <Alert severity="error"> Tuvimos un problema...</Alert>}
-      {state === 'loading' && <CircularProgress />}
+      {productosSeleccionados.state === 'hasError' && (
+        <Alert severity="error"> Tuvimos un problema...</Alert>
+      )}
+      {productosSeleccionados.state === 'loading' && <CircularProgress />}
     </>
   )
 }

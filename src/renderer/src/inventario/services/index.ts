@@ -7,7 +7,7 @@ const pb = new PocketBase(api.uri_api)
 export const buscarProductos = async (palabrasClave: string): Promise<Producto[]> => {
   const respuesta = await pb
     .collection('productos')
-    .getFullList({ filter: `descripcion ~ '${palabrasClave}'` })
+    .getFullList({ filter: `descripcion ~ '${palabrasClave}' || categoria ~ '${palabrasClave}'` })
   const productosEncontrados = respuesta.map((item) => {
     return {
       id: item.id,
@@ -21,7 +21,7 @@ export const buscarProductos = async (palabrasClave: string): Promise<Producto[]
 }
 
 export const obtenerProductosPorID = async (ids: string[]): Promise<Producto[]> => {
-  const respuesta = await pb.collection('productos').getFullList({ filter: `id ?~ '${ids}'` })
+  const respuesta = await pb.collection('productos').getFullList({ filter: `'${ids}' ~ id ` })
   const productosEncontrados = respuesta.map((item) => {
     return {
       id: item.id,

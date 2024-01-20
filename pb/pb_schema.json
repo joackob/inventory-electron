@@ -123,6 +123,20 @@
             "kg"
           ]
         }
+      },
+      {
+        "system": false,
+        "id": "6sbtkkh5",
+        "name": "almacenado",
+        "type": "number",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "noDecimal": false
+        }
       }
     ],
     "indexes": [

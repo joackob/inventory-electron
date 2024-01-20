@@ -1,10 +1,12 @@
-import { Box } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid'
 import { ReactNode } from 'react'
 import { useAtomValue, useSetAtom } from 'jotai'
 import productosEncontrados from './state'
-import { idsSeleccionados, seleccionarProductoID } from '@renderer/carrito-de-compras/state'
+import {
+  idsProductosSeleccionados,
+  seleccionarProductoID
+} from '@renderer/carrito-de-compras/state'
 
 const columns: GridColDef[] = [
   { field: 'categoria', headerName: 'Categoría', width: 150 },
@@ -17,35 +19,27 @@ const Catalogo = (): ReactNode => {
   const theme = useTheme()
   const productos = useAtomValue(productosEncontrados)
   const seleccionar = useSetAtom(seleccionarProductoID)
-  const seleccionados = useAtomValue(idsSeleccionados)
+  const seleccionados = useAtomValue(idsProductosSeleccionados)
 
   return (
-    <Box
+    <DataGrid
+      rows={productos}
+      columns={columns}
+      checkboxSelection
+      disableColumnFilter
+      disableColumnMenu
+      disableColumnSelector
+      disableDensitySelector
       sx={{
+        borderRadius: '16px',
         backgroundColor: theme.palette.common.white,
-        height: '100%'
+        minHeight: '256px'
       }}
-    >
-      <DataGrid
-        rows={productos}
-        columns={columns}
-        checkboxSelection
-        disableColumnFilter
-        disableColumnMenu
-        disableColumnSelector
-        disableDensitySelector
-        sx={{
-          borderRadius: '16px',
-          backgroundColor: theme.palette.common.white,
-          minHeight: '256px'
-        }}
-        rowSelectionModel={seleccionados as GridRowSelectionModel}
-        onRowClick={(params): void => {
-          const { id: idSeleccionado } = params
-          seleccionar(idSeleccionado as string)
-        }}
-      />
-    </Box>
+      rowSelectionModel={seleccionados as GridRowSelectionModel}
+      onRowClick={({ id: idSeleccionado }): void => {
+        seleccionar(idSeleccionado as string)
+      }}
+    />
   )
 }
 

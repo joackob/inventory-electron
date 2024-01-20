@@ -4,7 +4,7 @@ import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid'
 import { ReactNode } from 'react'
 import { useAtomValue, useSetAtom } from 'jotai'
 import productosEncontrados from './state'
-import { idsSeleccionados, seleccionarID } from '@renderer/carrito-de-compras/state'
+import { idsSeleccionados, seleccionarProductoID } from '@renderer/carrito-de-compras/state'
 
 const columns: GridColDef[] = [
   { field: 'categoria', headerName: 'Categoría', width: 150 },
@@ -16,7 +16,7 @@ const columns: GridColDef[] = [
 const TablaInventario = (): ReactNode => {
   const theme = useTheme()
   const productos = useAtomValue(productosEncontrados)
-  const seleccionar = useSetAtom(seleccionarID)
+  const seleccionar = useSetAtom(seleccionarProductoID)
   const seleccionados = useAtomValue(idsSeleccionados)
 
   return (

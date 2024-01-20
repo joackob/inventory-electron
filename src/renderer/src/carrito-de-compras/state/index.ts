@@ -4,7 +4,7 @@ import { obtenerProductosPorID } from '@renderer/inventario/services'
 
 export const idsSeleccionados = atom<string[]>([])
 
-export const seleccionarID = atom(null, (get, set, idPorAgregar: string) => {
+export const seleccionarProductoID = atom(null, (get, set, idPorAgregar: string) => {
   const seleccionados = get(idsSeleccionados)
   const seleccionActualizada = seleccionados.includes(idPorAgregar)
     ? seleccionados.filter((id) => id !== idPorAgregar)

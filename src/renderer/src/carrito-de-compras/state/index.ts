@@ -1,6 +1,6 @@
 import { atom } from 'jotai'
 import { loadable } from 'jotai/utils'
-import { obtenerProductosPorID } from '@renderer/inventario/services'
+import { obtenerProductosPorID } from '@renderer/catalogo/services'
 
 export const idsSeleccionados = atom<string[]>([])
 

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import Encabezado from '@renderer/encabezado'
-import TablaDeInventario from '@renderer/inventario'
+import Catalogo from '@renderer/catalogo'
 import { Box } from '@mui/material'
 
 const App = (): ReactNode => {
@@ -10,7 +10,7 @@ const App = (): ReactNode => {
         <Encabezado />
       </Box>
       <Box component={'main'} flexGrow={1}>
-        <TablaDeInventario />
+        <Catalogo />
       </Box>
     </Box>
   )

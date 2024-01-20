@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { Input, Stack, useTheme } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import { useSetAtom } from 'jotai'
-import { actualizarProductosPorBusqueda } from '@renderer/inventario/state'
+import { actualizarProductosPorBusqueda } from '@renderer/catalogo/state'
 
 const Buscador = (): ReactNode => {
   const theme = useTheme()

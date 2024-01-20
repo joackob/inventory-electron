@@ -13,7 +13,7 @@ const columns: GridColDef[] = [
   { field: 'unidad', headerName: 'Unidad de medida', width: 150 }
 ]
 
-const TablaInventario = (): ReactNode => {
+const Catalogo = (): ReactNode => {
   const theme = useTheme()
   const productos = useAtomValue(productosEncontrados)
   const seleccionar = useSetAtom(seleccionarProductoID)
@@ -49,4 +49,4 @@ const TablaInventario = (): ReactNode => {
   )
 }
 
-export default TablaInventario
+export default Catalogo

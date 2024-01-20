@@ -43,7 +43,7 @@ const ListadoDeCompras = ({ productos }: { productos: ProductoAComprar[] }): Rea
         </Typography>
         <Box flexGrow={1} />
         <Typography fontWeight={'bold'} marginBottom={'8px'}>
-          Total: ${precioFinal}
+          Total: ${precioFinal.toFixed(2)}
         </Typography>
       </Toolbar>
       <DataGrid

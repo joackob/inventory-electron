@@ -2,7 +2,7 @@ import { obtenerProductosSeleccionados } from '@renderer/carrito-de-compras/stat
 import { useAtomValue } from 'jotai'
 import { ReactNode } from 'react'
 import ListadoDeCompras from './components/listado-de-compras'
-import { Producto } from '@renderer/inventario/models/producto'
+import { Producto } from '@renderer/catalogo/models/producto'
 import { Alert, CircularProgress } from '@mui/material'
 
 const ResumenCompra = (): ReactNode => {

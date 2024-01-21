@@ -21,7 +21,10 @@ export const obtenerProductosSeleccionados = loadable(
   atom(async (get) => {
     const ids = get(idsProductosSeleccionados)
     const productos = await obtenerProductosPorID(ids)
-    return productos
+    return productos.map((producto) => ({
+      ...producto,
+      cantidad: 1
+    }))
   })
 )
 

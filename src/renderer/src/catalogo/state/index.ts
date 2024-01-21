@@ -5,8 +5,12 @@ import { buscarProductos } from '../services'
 export const productos = atom<Producto[]>([])
 
 export const actualizarProductosPorBusqueda = atom(null, async (_, set, palabrasClave: string) => {
-  const productosEncontrados = await buscarProductos(palabrasClave)
-  set(productos, productosEncontrados)
+  try {
+    const productosEncontrados = await buscarProductos(palabrasClave)
+    set(productos, productosEncontrados)
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 export default productos

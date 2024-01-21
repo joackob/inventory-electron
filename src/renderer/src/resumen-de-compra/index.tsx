@@ -2,7 +2,6 @@ import { obtenerProductosSeleccionados } from '@renderer/carrito-de-compras/stat
 import { useAtomValue } from 'jotai'
 import { ReactNode } from 'react'
 import ListadoDeCompras from './components/listado-de-compras'
-import { Producto } from '@renderer/catalogo/models/producto'
 import { Alert, CircularProgress } from '@mui/material'
 
 const ResumenCompra = (): ReactNode => {
@@ -11,12 +10,7 @@ const ResumenCompra = (): ReactNode => {
   return (
     <>
       {productosSeleccionados.state === 'hasData' && (
-        <ListadoDeCompras
-          productos={productosSeleccionados.data.map((item: Producto) => ({
-            ...item,
-            cantidad: 1
-          }))}
-        />
+        <ListadoDeCompras productos={productosSeleccionados.data} />
       )}
       {productosSeleccionados.state === 'hasError' && (
         <Alert severity="error"> Tuvimos un problema...</Alert>

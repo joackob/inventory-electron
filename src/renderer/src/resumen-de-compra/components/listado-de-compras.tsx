@@ -4,7 +4,7 @@ import { Box, Toolbar, Tooltip, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { DataGrid, GridColDef, GridEditCellProps, GridEditInputCell } from '@mui/x-data-grid'
 
-const columns: GridColDef[] = [
+const columnas: GridColDef[] = [
   { field: 'descripcion', headerName: 'Descripción', width: 300 },
   { field: 'precio', headerName: 'Precio', type: 'number' },
   { field: 'unidad', headerName: 'Unidad de medida' },
@@ -14,14 +14,14 @@ const columns: GridColDef[] = [
     type: 'number',
     editable: true,
     preProcessEditCellProps: ({ props }): GridEditCellProps => {
-      const { value: cantidad } = props
-      const cantidadInaceptable = cantidad < 0
+      const { value: cantidadAAdquirir } = props
+      const cantidadInaceptable = cantidadAAdquirir < 0
       return { ...props, error: cantidadInaceptable }
     },
     renderEditCell: (props): ReactNode => {
       const { error: valorInaceptable } = props
       return (
-        <Tooltip open={valorInaceptable} title={'No puede ser menor a 0'}>
+        <Tooltip open={valorInaceptable} arrow title={'No puede ser menor a 0'}>
           <Box>
             <GridEditInputCell {...props} />
           </Box>
@@ -47,7 +47,7 @@ const ListadoDeCompras = ({ productos }: { productos: ProductoAComprar[] }): Rea
         </Typography>
       </Toolbar>
       <DataGrid
-        columns={columns}
+        columns={columnas}
         rows={resumen}
         sx={{ backgroundColor: theme.palette.common.white }}
         density={'compact'}
